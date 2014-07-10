@@ -1,38 +1,48 @@
-// set the scene size
-var WIDTH = 400,
-  HEIGHT = 300;
 
-// set some camera attributes
-var VIEW_ANGLE = 45,
-  ASPECT = WIDTH / HEIGHT,
-  NEAR = 0.1,
-  FAR = 10000;
+	// set the scene size
+	var WIDTH = 1100,
+	    HEIGHT = 600;
 
-// get the DOM element to attach to
-// - assume we've got jQuery to hand
-var $container = $('#container');
+	// set some camera attributes
+	var VIEW_ANGLE = 45,
+	    ASPECT = WIDTH / HEIGHT,
+	    NEAR = 0.1,
+	    FAR = 10000;
 
-// create a WebGL renderer, camera
-// and a scene
-var renderer = new THREE.WebGLRenderer();
-var camera =
-  new THREE.PerspectiveCamera(
-    VIEW_ANGLE,
-    ASPECT,
-    NEAR,
-    FAR);
+	var $container = $('#container');
 
-var scene = new THREE.Scene();
+	var renderer = new THREE.WebGLRenderer();
 
-// add the camera to the scene
-scene.add(camera);
+	var camera = new THREE.PerspectiveCamera(  VIEW_ANGLE,
+	                                ASPECT,
+	                                NEAR,
+	                                FAR  );
+	var scene = new THREE.Scene();
 
-// the camera starts at 0,0,0
-// so pull it back
-camera.position.z = 300;
+	// start the renderer
+	renderer.setSize(WIDTH, HEIGHT);
 
-// start the renderer
-renderer.setSize(WIDTH, HEIGHT);
+	$container.append(renderer.domElement);
 
-// attach the render-supplied DOM element
-$container.append(renderer.domElement);
+	var radius = 100, segments = 16, rings = 16;
+	var sphereMaterial = new THREE.MeshLambertMaterial(
+	{
+	    color: 0x0099FF
+	});
+
+	var sphere = new THREE.Mesh(
+	   new THREE.SphereGeometry(radius, segments, rings),
+	   sphereMaterial);
+
+	var pointLight = new THREE.PointLight( 0xFFFFFF );
+
+	pointLight.position.x = 10;
+	pointLight.position.y = 50;
+	pointLight.position.z = 160;
+	camera.position.z = 300;
+
+	scene.add(sphere);
+	scene.add(pointLight);
+	scene.add(camera);
+	// draw!
+	renderer.render(scene, camera);
