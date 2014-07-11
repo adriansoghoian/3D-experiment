@@ -3,7 +3,7 @@ var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
-function init() {
+function initialize() {
   container = document.createElement( 'div' );
   document.body.appendChild( container );
 
@@ -17,19 +17,19 @@ function init() {
 
   for ( i = 0; i < 150000; i ++ ) {
     var vertex = new THREE.Vector3();
-    vertex.x = Math.random() * 2000 - 1000;
-    vertex.y = Math.random() * 2000 - 1000;
-    vertex.z = Math.random() * 2000 - 1000;
+    vertex.x = Math.random() * 1000;
+    vertex.y = Math.random() * 1000;
+    vertex.z = Math.random() * 1000;
     geometry.vertices.push(vertex);
   }
 
   for ( i = 0; i < 15; i ++ ) {
     materials[i] = new THREE.ParticleSystemMaterial( { size : i } );
-    particles = new THREE.ParticleSystem( geometry);
+    particles = new THREE.ParticleSystem( geometry );
 
-    particles.rotation.x = Math.random()*2;
-    particles.rotation.y = Math.random()*2;
-    particles.rotation.z = Math.random()*2;
+    particles.rotation.x = Math.random();
+    particles.rotation.y = Math.random();
+    particles.rotation.z = Math.random();
 
     scene.add(particles);
   }
@@ -78,19 +78,11 @@ function render() {
   renderer.render(scene, camera);
 }
 
-$(document).keydown(function(e) {
-  if (e.which == 81) {
-    camera.position.z = camera.position.z + 100;
-  } 
-  if (e.which == 65){
-    camera.position.z = camera.position.z - 100;
-  }
-});
-
 function animate() {
   requestAnimationFrame(animate);
   render();
 }
 
-init();
+
+initialize();
 animate();
