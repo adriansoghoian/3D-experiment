@@ -13,7 +13,7 @@ function init() {
   scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2( 0x00000, 0.0022 );
 
-  geometry = new THREE.CubeGeometry();
+  geometry = new THREE.Geometry();
 
   for ( i = 0; i < 150000; i ++ ) {
     var vertex = new THREE.Vector3();
@@ -77,6 +77,15 @@ function render() {
   }
   renderer.render(scene, camera);
 }
+
+$(document).keydown(function(e) {
+  if (e.which == 81) {
+    camera.position.z = camera.position.z + 100;
+  } 
+  if (e.which == 65){
+    camera.position.z = camera.position.z - 100;
+  }
+});
 
 function animate() {
   requestAnimationFrame(animate);
