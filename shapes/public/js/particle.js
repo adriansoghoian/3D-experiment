@@ -11,7 +11,7 @@ function initialize() {
   camera.position.z = 500;
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x00000, 0.0022 );
+  scene.fog = new THREE.FogExp2( 0x00000, 0.00022 );
 
   geometry = new THREE.Geometry();
 
@@ -25,7 +25,7 @@ function initialize() {
 
   for ( i = 0; i < 15; i ++ ) {
     materials[i] = new THREE.ParticleSystemMaterial( { size : i } );
-    particles = new THREE.ParticleSystem( geometry );
+    particles = new THREE.ParticleSystem(geometry);
 
     particles.rotation.x = Math.random();
     particles.rotation.y = Math.random();

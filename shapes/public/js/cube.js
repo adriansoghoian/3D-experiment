@@ -25,8 +25,8 @@ scene.add( torus );
 
 function render() { 
 	requestAnimationFrame(render); 
-	cube.rotation.x += 0.01; cube.rotation.y += 0.01;
-	torus.rotation.x += 0.01; torus.rotation.y += 0.03;
+	cube.rotation.x += 0.02; cube.rotation.y += 0.02; cube.rotation.z += 0.02
+	torus.rotation.x += 0.02; torus.rotation.y += 0.02; torus.rotation.z += 0.02;
 	renderer.render(scene, camera); 
 } 
 render();
