@@ -3,14 +3,32 @@ var camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHe
 var renderer = new THREE.WebGLRenderer(); renderer.setSize( window.innerWidth, window.innerHeight ); 
 document.body.appendChild( renderer.domElement );
 
-var geometry = new THREE.CubeGeometry(2,2,2); 
+var geometry = new THREE.CubeGeometry(5,5,5); 
 var material = new THREE.MeshBasicMaterial( { color: 0xFF0000, wireframe: true } ); 
 var cube = new THREE.Mesh( geometry, material ); 
-scene.add( cube ); camera.position.z = 8;
+scene.add( cube ); 
+
+camera.position.z = 50;
+var torus_geometry = new THREE.TorusGeometry( 10, 3, 20, 100 );
+var torus_material = new THREE.MeshBasicMaterial( { color: 0x00A2FA, wireframe: true } );
+var torus = new THREE.Mesh( torus_geometry, torus_material );
+scene.add( torus );
+
+// var ring_geometry = new THREE.RingGeometry( 1, 5, 32 );
+// var ring_material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+// var mesh = new THREE.Mesh( ring_geometry, ring_material );
+// scene.add( mesh );
+
+
+// var geometryr = new THREE.RingGeometry( 1, 5, 32 );
+// var materialr = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+// var mesh = new THREE.Mesh( geometryr, materialr );
+// scene.add( mesh );
 
 function render() { 
 	requestAnimationFrame(render); 
 	cube.rotation.x += 0.01; cube.rotation.y += 0.01;
+	torus.rotation.x += 0.01; torus.rotation.y += 0.03;
 	renderer.render(scene, camera); 
 } 
 render();
