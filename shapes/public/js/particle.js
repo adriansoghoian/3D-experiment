@@ -11,7 +11,7 @@ function init() {
   camera.position.z = 1000;
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x000000, 0.0022 );
+  scene.fog = new THREE.FogExp2( 0x000000, 0.0012 );
 
   geometry = new THREE.Geometry();
 
@@ -101,8 +101,8 @@ function render() {
 
   for ( i = 0; i < materials.length; i ++ ) {
     color = parameters[i][0];
-    h = ( 360 * ( color[0] + time ) % 360 ) / 360;
-    materials[i].color.setHSL( h, color[1], color[2] );
+
+    materials[i].color.setHSL( 0.3, 1, 0.5 );
   }
 
   renderer.render(scene, camera);
