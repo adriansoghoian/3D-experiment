@@ -1,4 +1,4 @@
-var camera, container, scene, renderer, particles, materials = [], parameters, i, h, color;
+var camera, container, scene, renderer, particles, materials = [], parameters = [], i, h, color;
 var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
@@ -8,14 +8,14 @@ function init() {
   document.body.appendChild( container );
 
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
-  camera.position.z = 1000;
+  camera.position.z = 500;
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x000000, 0.0012 );
+  scene.fog = new THREE.FogExp2( 0x00000, 0.0022 );
 
-  geometry = new THREE.Geometry();
+  geometry = new THREE.CubeGeometry();
 
-  for ( i = 0; i < 100000; i ++ ) {
+  for ( i = 0; i < 150000; i ++ ) {
     var vertex = new THREE.Vector3();
     vertex.x = Math.random() * 2000 - 1000;
     vertex.y = Math.random() * 2000 - 1000;
@@ -23,21 +23,13 @@ function init() {
     geometry.vertices.push(vertex);
   }
 
-  parameters = [
-    [ [1, 1, 0.5], 5 ],
-    [ [0.95, 1, 0.5], 4 ],
-    [ [0.90, 1, 0.5], 3 ],
-    [ [0.85, 1, 0.5], 2 ],
-    [ [0.80, 1, 0.5], 1 ]
-  ];
-
-  for ( i = 0; i < 5; i ++ ) {
+  for ( i = 0; i < 15; i ++ ) {
     materials[i] = new THREE.ParticleSystemMaterial( { size : i } );
-    particles = new THREE.ParticleSystem( geometry, materials[i] );
+    particles = new THREE.ParticleSystem( geometry);
 
-    particles.rotation.x = Math.random() * 1;
-    particles.rotation.y = Math.random() * 1;
-    particles.rotation.z = Math.random() * 1;
+    particles.rotation.x = Math.random()*2;
+    particles.rotation.y = Math.random()*2;
+    particles.rotation.z = Math.random()*2;
 
     scene.add(particles);
   }
@@ -49,18 +41,6 @@ function init() {
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   document.addEventListener( 'touchstart', onDocumentTouchStart, false );
   document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-
-  window.addEventListener( 'resize', onWindowResize, false );
-}
-
-function onWindowResize() {
-  windowHalfX = window.innerWidth / 2;
-  windowHalfY = window.innerHeight / 2;
-
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
 function onDocumentMouseMove(event) {
@@ -85,29 +65,18 @@ function onDocumentTouchMove(event) {
 }
 
 function render() {
-  var time = Date.now() * 0.00005;
-
-  camera.position.x += ( mouseX - camera.position.x ) * 0.1;
-  camera.position.y += ( - mouseY - camera.position.y ) * 0.1;
-
+  var time = Date.now() * 0.0000005;
+  camera.position.x += ( mouseX - camera.position.x ) * 0.10;
+  camera.position.y += ( - mouseY - camera.position.y ) * 0.10;
   camera.lookAt(scene.position);
-
   for ( i = 0; i < scene.children.length; i ++ ) {
-    var object = scene.children[ i ];
-    if ( object instanceof THREE.ParticleSystem ) {
-      object.rotation.x = time * ( i < 4 ? i - 0.5 : + ( i - 0.5 ) );
-    }
+    var object = scene.children[i];
+    object.rotation.x = time * i*1;
+    object.rotation.y = time * i*1;
+    object.rotation.z = time * i*5;
   }
-
-  for ( i = 0; i < materials.length; i ++ ) {
-    color = parameters[i][0];
-
-    materials[i].color.setHSL( 0.3, 1, 0.5 );
-  }
-
   renderer.render(scene, camera);
 }
-
 
 function animate() {
   requestAnimationFrame(animate);
