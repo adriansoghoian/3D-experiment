@@ -18,10 +18,6 @@ var torus_material = new THREE.MeshBasicMaterial( { color: 0x00A2FA, wireframe: 
 var torus = new THREE.Mesh( torus_geometry, torus_material );
 scene.add( torus );
 
-
-
-
-
 // var geometryr = new THREE.RingGeometry( 1, 5, 32 );
 // var materialr = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
 // var mesh = new THREE.Mesh( geometryr, materialr );
