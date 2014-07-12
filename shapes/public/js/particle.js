@@ -11,7 +11,7 @@ function initialize() {
   camera.position.z = 500;
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x00000, 0.00022 );
+  scene.fog = new THREE.FogExp2( 0x00000, 0.0022 );
 
   geometry = new THREE.Geometry();
 

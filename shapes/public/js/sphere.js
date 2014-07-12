@@ -50,7 +50,7 @@ $(document).ready(function () {
           };
 	})();
 
-	camera.position.z = 300;
+	camera.position.z = 500;
 
 	$(document).keydown(function(e) {
 	  if (e.which == 81) {
